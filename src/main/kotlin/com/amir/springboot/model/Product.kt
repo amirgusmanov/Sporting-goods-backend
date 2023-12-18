@@ -1,18 +1,16 @@
 package com.amir.springboot.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import lombok.NoArgsConstructor
+import jakarta.persistence.*
 
 @Entity
-@NoArgsConstructor
-data class Product(
+open class Product(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
-    val name: String,
-    val price: Double,
-    val description: String,
-    var productQuantity: Int = 1
+    open var id: Long = 0,
+    open var name: String,
+    open var price: Double,
+    open var description: String,
+    open var productQuantity: Int = 1,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "products")
+    open val user: User
 )
